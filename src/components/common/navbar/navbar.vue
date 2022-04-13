@@ -18,6 +18,9 @@ export default {
         display: flex;
         line-height: 44px;
         text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 99;
     }
 
     .left, .right{

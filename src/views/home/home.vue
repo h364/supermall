@@ -3,13 +3,8 @@
         <nav-bar class="home-navbar">
             <div slot="center">购物街</div>
         </nav-bar>
-        <swiper>
-            <swiper-item v-for="(item,index) in banners" :key="index">
-                <a :href="item.link">
-                    <img :src="item.image">
-                </a>
-            </swiper-item>
-        </swiper>
+       <home-swiper :banners="banners"></home-swiper>
+       <home-recommends :recommends="recommends"></home-recommends>
     </div>
 </template>
 
@@ -18,6 +13,8 @@
     import { homeRequest } from '@network/home.js'
     import swiper from '@components/common/swiper/swiper.vue'
     import swiperitem from '@components/common/swiper/swiperitem.vue'
+    import homeswiper from '@views/home/homeswiper/Homeswiper.vue'
+    import homerecommends from '@views/home/homerecommends/homerecommends.vue'
 
     export default {
         name: 'name',
@@ -30,7 +27,9 @@
         components: {
             'nav-bar': navbar,
             'swiper': swiper,
-            'swiper-item': swiperitem
+            'swiper-item': swiperitem,
+            'home-swiper': homeswiper,
+            'home-recommends': homerecommends
         },
         created() {
             homeRequest().then(res => {
