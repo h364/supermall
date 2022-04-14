@@ -2,7 +2,7 @@
 <template>
     <div id='featureview'>
         <a href="https://act.mogujie.com/zzlx64">
-            <img src="" alt="">
+            <img src="@assets/img/home/recommend_bg.jpg" alt="">
         </a>
     </div>
 </template>
@@ -15,5 +15,7 @@ export default {
 </script>
 
 <style scoped>
-
+    #featureview img{
+        width: 100%;
+    }
 </style>
