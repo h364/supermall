@@ -6,59 +6,8 @@
         <home-swiper :banners="banners"></home-swiper>
         <home-recommends :recommends="recommends"></home-recommends>
         <feature-view></feature-view>
-        <tab-control :titles="['流行','新款','精选']"></tab-control>
-        <ul>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-            <li>list</li>
-        </ul>
+        <tab-control :titles="['流行','新款','精选']" @tabclick="tabclick"></tab-control>
+        <goods-list :goods="goods[currentType].list"></goods-list>
     </div>
 </template>
 
@@ -71,17 +20,19 @@
     import homerecommends from '@views/home/homerecommends/homerecommends.vue'
     import featureview from '@views/home/featureview/featureview.vue'
     import tabcontrol from '@components/content/tabcontrol/tabcontrol.vue'
+    import goodslist from '@components/content/goodslist/goodslist.vue'
 
     export default {
         name: 'name',
         data() {
             return {
+                currentType: 'pop',
                 banners: [],
                 recommends: [],
                 goods: {
-                    'pop': {'page': 0, list: []},
-                    'new': {'page': 0, list: []},
-                    'sell': {'page': 0, list: []},
+                    'pop': { 'page': 0, list: [] },
+                    'new': { 'page': 0, list: [] },
+                    'sell': { 'page': 0, list: [] },
                 }
             }
         },
@@ -92,14 +43,17 @@
             'home-swiper': homeswiper,
             'home-recommends': homerecommends,
             'feature-view': featureview,
-            'tab-control': tabcontrol
+            'tab-control': tabcontrol,
+            'goods-list': goodslist
         },
         created() {
             this.homeRequest()
             this.homeGoods('pop')
+            this.homeGoods('new')
+            this.homeGoods('sell')
         },
         methods: {
-            homeRequest(){
+            homeRequest() {
                 homeRequest().then(res => {
                     this.banners = res.data.banner.list
                     this.recommends = res.data.recommend.list
@@ -107,11 +61,26 @@
                     console.log(err);
                 })
             },
-            homeGoods(type){
+            homeGoods(type) {
                 const page = this.goods[type].page + 1
                 homeGoods(type, page).then(res => {
-                
-            })
+                    this.goods[type].list.push(...res.data.list)
+                })
+            },
+            tabclick(index) {
+                switch (index) {
+                    case 0:
+                        this.currentType = 'pop'
+                        break;
+                    case 1:
+                        this.currentType = 'new'
+                        break;
+                    case 2:
+                        this.currentType = 'sell'
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

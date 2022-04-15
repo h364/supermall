@@ -26,6 +26,7 @@
         methods: {
             itemclick(index) {
                 this.currentindex = index
+                this.$emit('tabclick',index)
             }
         }
     }
@@ -35,12 +36,16 @@
     #tabcontrol {
         display: flex;
         text-align: center;
+        height: 45px;
+        background-color: white;
         position: sticky;
-        top: 49px;
+        top: 44px;
+        z-index: 9;
     }
 
     .tabitem {
         flex: 1;
+        margin-top: 7px;
     }
 
     .tabitem span {
