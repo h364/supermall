@@ -3,14 +3,15 @@
         <nav-bar class="home-navbar">
             <div slot="center">购物街</div>
         </nav-bar>
-        <scroll class="content" ref="backtop">
+        <scroll class="content" ref="backtop" @contentScroll="contentScroll" :scrollProbeType="3" :pullUpLoadMore="true"
+            @pullUpLoad="loadMore">
             <home-swiper :banners="banners"></home-swiper>
             <home-recommends :recommends="recommends"></home-recommends>
             <feature-view></feature-view>
             <tab-control :titles="['流行','新款','精选']" @tabclick="tabclick"></tab-control>
             <goods-list :goods="showgoods"></goods-list>
         </scroll>
-        <back-top @click.native="backclick"></back-top>
+        <back-top @click.native="backclick" v-show="isShowBackTop"></back-top>
     </div>
 </template>
 
@@ -38,7 +39,8 @@
                     'pop': { 'page': 0, list: [] },
                     'new': { 'page': 0, list: [] },
                     'sell': { 'page': 0, list: [] },
-                }
+                },
+                isShowBackTop: false
             }
         },
         components: {
@@ -77,6 +79,7 @@
                 const page = this.goods[type].page + 1
                 homeGoods(type, page).then(res => {
                     this.goods[type].list.push(...res.data.list)
+                    this.goods[type].page += 1
                 })
             },
             tabclick(index) {
@@ -95,7 +98,14 @@
                 }
             },
             backclick() {
-                this.$refs.backtop.scroll.scrollTo(0,0,500)
+                this.$refs.backtop.scroll.scrollTo(0, 0, 500)
+            },
+            contentScroll(position) {
+                this.isShowBackTop = -position.y > 751
+            },
+            loadMore() {
+                this.homeGoods(this.currentType)
+                this.$refs.backtop.scroll.finishPullUp()
             }
         }
     }

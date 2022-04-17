@@ -13,14 +13,36 @@
         name: 'scroll',
         data() {
             return {
-                scroll: null
+                scroll: null,
+            }
+        },
+        props: {
+            scrollProbeType: {
+                type: Number,
+                default() {
+                    return 0
+                }
+            },
+            pullUpLoadMore: {
+                type: Boolean,
+                default() {
+                    return false
+                }
             }
         },
         mounted() {
-            this.scroll = new BScroll(this.$refs.wrapper,{
+            this.scroll = new BScroll(this.$refs.wrapper, {
                 observeDOM: true,
                 click: true,
-                mouseWheel: true
+                mouseWheel: true,
+                probeType: this.scrollProbeType,
+                pullUpLoad: this.pullUpLoadMore
+            })
+            this.scroll.on('scroll', position => {
+                this.$emit('contentScroll', position)
+            })
+            this.scroll.on('pullingUp', () => {
+                this.$emit('pullUpLoad')
             })
         }
 
