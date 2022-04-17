@@ -45,7 +45,7 @@
 
     .tabitem {
         flex: 1;
-        margin-top: 7px;
+        margin-top: 10px;
     }
 
     .tabitem span {

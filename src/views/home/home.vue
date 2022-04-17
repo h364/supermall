@@ -3,11 +3,14 @@
         <nav-bar class="home-navbar">
             <div slot="center">购物街</div>
         </nav-bar>
-        <home-swiper :banners="banners"></home-swiper>
-        <home-recommends :recommends="recommends"></home-recommends>
-        <feature-view></feature-view>
-        <tab-control :titles="['流行','新款','精选']" @tabclick="tabclick"></tab-control>
-        <goods-list :goods="goods[currentType].list"></goods-list>
+        <scroll class="content" ref="backtop">
+            <home-swiper :banners="banners"></home-swiper>
+            <home-recommends :recommends="recommends"></home-recommends>
+            <feature-view></feature-view>
+            <tab-control :titles="['流行','新款','精选']" @tabclick="tabclick"></tab-control>
+            <goods-list :goods="showgoods"></goods-list>
+        </scroll>
+        <back-top @click.native="backclick"></back-top>
     </div>
 </template>
 
@@ -21,6 +24,8 @@
     import featureview from '@views/home/featureview/featureview.vue'
     import tabcontrol from '@components/content/tabcontrol/tabcontrol.vue'
     import goodslist from '@components/content/goodslist/goodslist.vue'
+    import scroll from '@components/common/scroll/scroll.vue'
+    import backtop from '@components/content/backtop/backtop.vue'
 
     export default {
         name: 'name',
@@ -44,13 +49,20 @@
             'home-recommends': homerecommends,
             'feature-view': featureview,
             'tab-control': tabcontrol,
-            'goods-list': goodslist
+            'goods-list': goodslist,
+            'scroll': scroll,
+            'back-top': backtop
         },
         created() {
             this.homeRequest()
             this.homeGoods('pop')
             this.homeGoods('new')
             this.homeGoods('sell')
+        },
+        computed: {
+            showgoods() {
+                return this.goods[this.currentType].list
+            }
         },
         methods: {
             homeRequest() {
@@ -81,13 +93,24 @@
                     default:
                         break;
                 }
+            },
+            backclick() {
+                this.$refs.backtop.scroll.scrollTo(0,0,500)
             }
         }
     }
 </script>
 
 <style scoped>
+    #home {
+        height: 100vh;
+    }
+
     .home-navbar {
         background-color: var(--color-text);
+    }
+
+    .content {
+        height: 751px;
     }
 </style>
