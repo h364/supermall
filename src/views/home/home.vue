@@ -60,6 +60,9 @@
             this.homeGoods('pop')
             this.homeGoods('new')
             this.homeGoods('sell')
+            this.$bus.$on('imgLoad',() => {
+                this.$refs.backtop.scroll.refresh()
+            })
         },
         computed: {
             showgoods() {
@@ -106,7 +109,7 @@
             loadMore() {
                 this.homeGoods(this.currentType)
                 this.$refs.backtop.scroll.finishPullUp()
-            }
+            },
         }
     }
 </script>

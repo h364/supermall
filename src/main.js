@@ -5,7 +5,7 @@ import store from './store'
 import { request } from './network/request.js'
 
 Vue.config.productionTip = false
-
+Vue.prototype.$bus = new Vue()
 new Vue({
   router,
   store,
