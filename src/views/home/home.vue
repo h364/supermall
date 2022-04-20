@@ -60,9 +60,16 @@
             this.homeGoods('pop')
             this.homeGoods('new')
             this.homeGoods('sell')
-            this.$bus.$on('imgLoad',() => {
+        },
+        mounted() {
+            const refresh = this.debounce(this.$refs.backtop.scroll.refresh, 20)
+            this.$bus.$on('imgLoad', () => {
+                //refresh()
                 this.$refs.backtop.scroll.refresh()
             })
+        },
+        beforeDestroy() {
+            this.$bus.$off('imgLoad')
         },
         computed: {
             showgoods() {
@@ -110,6 +117,17 @@
                 this.homeGoods(this.currentType)
                 this.$refs.backtop.scroll.finishPullUp()
             },
+            debounce(func, delay) {
+                let timer
+                return function (...args) {
+                    if(timer){
+                        clearTimeout(timer)
+                    }
+                    timer = setTimeout(() => {
+                        func.apply(this, args)
+                    },delay)
+                }
+            }
         }
     }
 </script>

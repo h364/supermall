@@ -33,6 +33,7 @@
         mounted() {
             this.scroll = new BScroll(this.$refs.wrapper, {
                 observeDOM: true,
+                observeImage: true,
                 click: true,
                 mouseWheel: true,
                 probeType: this.scrollProbeType,
