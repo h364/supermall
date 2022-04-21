@@ -22,6 +22,9 @@ export default {
         top: 0;
         z-index: 99;
     }
+    .nav-bar img{
+        width: 25px;
+    }
 
     .left, .right{
         width: 60px;

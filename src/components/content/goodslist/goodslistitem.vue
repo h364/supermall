@@ -1,6 +1,6 @@
 <template>
     <div class='goodslistitem'>
-        <img :src="goodsitem.show.img" alt="" @load="imgLoad">
+        <img :src="goodsitem.show.img" alt="" @load="imgLoad" @click="imgClick">
         <div>
             <p>{{goodsitem.title}}</p>
             <span class="price">{{goodsitem.price}}</span>
@@ -10,32 +10,37 @@
 </template>
 
 <script>
-export default {
-    name: 'name',
-    props: {
-        goodsitem: {
-            type: Object,
-            default(){
-                return {}
+    export default {
+        name: 'name',
+        props: {
+            goodsitem: {
+                type: Object,
+                default() {
+                    return {}
+                }
+            }
+        },
+        methods: {
+            imgLoad() {
+                this.$bus.$emit('imgLoad')
+            },
+            imgClick() {
+                this.$router.push('/detail/' + this.goodsitem.iid);
             }
         }
-    },
-    methods: {
-        imgLoad(){
-            this.$bus.$emit('imgLoad')
-        }
     }
-}
 </script>
 
 <style scoped>
-    .goodslistitem{
+    .goodslistitem {
         width: 48%;
     }
-    .goodslistitem img{
+
+    .goodslistitem img {
         width: 100%;
     }
-    .goodslistitem .price{
+
+    .goodslistitem .price {
         color: var(--color-text);
     }
 </style>
