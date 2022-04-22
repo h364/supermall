@@ -23,14 +23,12 @@ export default {
         'swiper': swiper,
         'swiper-item': swiperitem
     },
-    created () {
-        console.log(this.topImages);
-    }
 }
 </script>
 
 <style scoped>
     .swiperInDetail{
-        width: 100%;
+        height: 300px;
+        overflow: hidden;
     }
 </style>
