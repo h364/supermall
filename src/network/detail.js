@@ -23,12 +23,20 @@ export class detailGoods {
 }
 
 export class detailShop {
-    constructor(shopInfo){
+    constructor(shopInfo) {
         this.logo = shopInfo.shopLogo
         this.name = shopInfo.name
         this.fans = shopInfo.cFans
         this.sells = shopInfo.cSells
         this.score = shopInfo.score
         this.goodsCount = shopInfo.cGoods
+    }
+}
+
+export class detailParam {
+    constructor(info, rule) {
+        this.image = info.images ? info.images[0] : ''
+        this.infos = info.set
+        this.sizes = rule.tables
     }
 }

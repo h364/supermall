@@ -5,16 +5,20 @@
             <detail-swiper :topImages="topImages"></detail-swiper>
             <detail-message :message="goods"></detail-message>
             <detail-shopinfo :shopinfo="shopinfo"></detail-shopinfo>
+            <detail-goodsinfo :goodsInfo="goodsInfo"></detail-goodsinfo>
+            <detail-goodsparam :goodsParam="goodsParam"></detail-goodsparam>
         </scroll>
     </div>
 </template>
 
 <script>
-    import { detailRequest, detailGoods, detailShop } from '@network/detail.js'
+    import { detailRequest, detailGoods, detailShop, detailParam } from '@network/detail.js'
     import detailNavbar from '@views/detail/detail/detailNavbar.vue'
     import detailswiper from '@views/detail/detail/detailswiper.vue'
     import detailmessage from '@views/detail/detail/detailmessage.vue'
     import detailshopinfo from '@views/detail/detail/detailshopinfo.vue'
+    import detailGoodsInfo from '@views/detail/detail/detailGoodsInfo.vue'
+    import detailGoodsParam from '@views/detail/detail/detailGoodsParam.vue'
     import scroll from '@components/common/scroll/scroll.vue'
     export default {
         name: 'detail',
@@ -23,7 +27,9 @@
                 iid: null,
                 topImages: [],
                 goods: {},
-                shopinfo: {}
+                shopinfo: {},
+                goodsInfo: {},
+                goodsParam: {}
             }
         },
         components: {
@@ -31,6 +37,8 @@
             'detail-swiper': detailswiper,
             'detail-message': detailmessage,
             'detail-shopinfo': detailshopinfo,
+            'detail-goodsinfo': detailGoodsInfo,
+            'detail-goodsparam': detailGoodsParam,
             'scroll': scroll
         },
         created() {
@@ -39,7 +47,10 @@
                 this.topImages.push(...res.result.itemInfo.topImages)
                 this.goods = new detailGoods(res.result.itemInfo, res.result.columns, res.result.shopInfo.services)
                 this.shopinfo = new detailShop(res.result.shopInfo)
-                console.log(this.shopinfo);
+                this.goodsParam = new detailParam(res.result.itemParams.info, res.result.itemParams.rule)
+                this.goodsInfo = res.result.detailInfo
+                //console.log(res.result);
+                console.log(this.goodsParam);
             })
         }
     }

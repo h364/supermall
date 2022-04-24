@@ -38,6 +38,9 @@
 </script>
 
 <style scoped>
+    .detailmessage{
+        height: 230px;
+    }
     .message {
         font-size: 18px;
         color: black;
