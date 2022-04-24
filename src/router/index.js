@@ -16,23 +16,28 @@ const routes = [
   },
   {
     path: '/home',
-    component: home
+    component: home,
+    name: 'home'
   },
   {
     path: '/category',
-    component: category
+    component: category,
+    name: 'category'
   },
   {
     path: '/shoppingcart',
-    component: shoppingcart
+    component: shoppingcart,
+    name: 'shopingcart'
   },
   {
     path: '/profile',
-    component: profile
+    component: profile,
+    name: 'profile'
   },
   {
     path: '/detail/:iid',
-    component: detail
+    component: detail,
+    name: 'detail'
   }
 ]
 

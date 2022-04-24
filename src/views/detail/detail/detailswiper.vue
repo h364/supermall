@@ -28,7 +28,7 @@ export default {
 
 <style scoped>
     .swiperInDetail{
-        height: 300px;
+        height: 60vh;
         overflow: hidden;
     }
 </style>

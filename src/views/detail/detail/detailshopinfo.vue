@@ -26,12 +26,16 @@
                         <div class="commentItem">
                             <span>{{item.name}}</span>
                             <span :class="{isBetter: item.isBetter, isBad: !item.isBetter }">{{item.score}}</span>
-                            <span :class="{isBetter: item.isBetter, isBad: !item.isBetter }" v-if="item.isBetter">高</span>
+                            <span :class="{isBetter: item.isBetter, isBad: !item.isBetter }"
+                                v-if="item.isBetter">高</span>
                             <span :class="{isBetter: item.isBetter, isBad: !item.isBetter }" v-else>低</span>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="entryShop">
+            <span>进店逛逛</span>
         </div>
     </div>
 </template>
@@ -46,7 +50,7 @@
             }
         },
         methods: {
-            
+
         }
     }
 </script>
@@ -54,7 +58,8 @@
 <style scoped>
     .detailshopinfo {
         position: relative;
-        height: 250px;
+        height: 230px;
+        box-shadow: 0 5px 3px rgba(128, 128, 128, 0.2);
     }
 
     .shopLogo {
@@ -71,7 +76,7 @@
     .shopName {
         display: inline-block;
         position: absolute;
-        left: 85px;
+        left: 98px;
         top: 50%;
         transform: translate(-50%, -50%);
     }
@@ -101,11 +106,11 @@
 
     .middleLine {
         width: 1px;
-        height: 75px;
+        height: 65px;
         position: absolute;
-        background-color: grey;
+        background-color: rgba(128, 128, 128, 0.5);
         box-shadow: 0 0 2px rgba(128, 128, 128, 0.3);
-        bottom: 75px;
+        bottom: 55px;
         left: 50%;
         transform: translate(-50%, -50%);
     }
@@ -136,11 +141,24 @@
         transform: translate(-50%, -50%);
     }
 
-    .isBetter{
+    .isBetter {
         color: var(--color-text);
     }
 
-    .isBad{
+    .isBad {
         color: rgba(0, 128, 0, 0.7);
+    }
+
+    .entryShop{
+        position: absolute;
+        text-align: center;
+        line-height: 25px;
+        height: 25px;
+        width: 125px;
+        bottom: 20px;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: rgba(128, 128, 128, 0.3);
+        border-radius: 10px;
     }
 </style>

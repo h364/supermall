@@ -1,5 +1,5 @@
 <template>
-    <div class="detaiNavbar">
+    <div class="detailNavbar">
         <navbar class="navbar">
             <div slot="left" class="detailImg" @click="imgClick">
                 <img src="@assets/img/detail/back.png" alt="">
@@ -39,6 +39,11 @@ export default {
 </script>
 
 <style scoped>
+    .detailNavbar{
+        background-color: #fff;
+        position: relative;
+        z-index: 9;
+    }
     .detail{
         display: flex;
     }
