@@ -1,10 +1,14 @@
 <template>
     <div class='goodslistitem'>
         <img :src="goodsitem.show.img" alt="" @load="imgLoad" @click="imgClick">
-        <div>
+        <div class="message">
             <p>{{goodsitem.title}}</p>
             <span class="price">{{goodsitem.price}}</span>
-            <span class="collect">{{goodsitem.cfav}}</span>
+            <span class="collect">
+                <img v-if="isCollection" @click="collection" src="@assets/img/common/collection-active.png">
+                <img v-else @click="collection" src="@assets/img/common/collection.png">
+                <span>{{goodsitem.cfav}}</span>
+            </span>
         </div>
     </div>
 </template>
@@ -12,6 +16,11 @@
 <script>
     export default {
         name: 'name',
+        data() {
+            return {
+                isCollection: false
+            }
+        },
         props: {
             goodsitem: {
                 type: Object,
@@ -26,6 +35,14 @@
             },
             imgClick() {
                 this.$router.push('/detail/' + this.goodsitem.iid);
+            },
+            collection() {
+                this.isCollection = !this.isCollection
+                if (this.isCollection) {
+                    this.goodsitem.cfav++
+                } else {
+                    this.goodsitem.cfav--
+                }
             }
         }
     }
@@ -42,5 +59,27 @@
 
     .goodslistitem .price {
         color: var(--color-text);
+    }
+
+    .message {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .price,
+    .collect {
+        text-align: center;
+        flex: 1;
+        height: 23px;
+        line-height: 23px;
+        position: relative;
+    }
+
+    .collect img {
+        width: 20px;
+    }
+
+    .collect span {
+        position: absolute;
     }
 </style>

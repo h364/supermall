@@ -11,6 +11,9 @@
                 <span class="itemValue">{{item.value}}</span>
             </div>
         </div>
+        <div class="goodsService" v-if="goodsParam.image != 0">
+            <img :src="goodsParam.image" alt="">
+        </div>
     </div>
 </template>
 
@@ -41,7 +44,7 @@
 
     .sizeInfo {
         display: flex;
-        margin: 26px 17px 17px;
+        margin: 26px 32px 17px;
     }
 
     .sizeInfo span {
@@ -65,5 +68,11 @@
         transform: translate(0, -50%);
         color: var(--color-text);
         left: 100px;
+    }
+    .goodsService{
+        margin-top: 15px;
+    }
+    .goodsService img{
+        width: 100vw;
     }
 </style>

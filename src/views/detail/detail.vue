@@ -7,6 +7,7 @@
             <detail-shopinfo :shopinfo="shopinfo"></detail-shopinfo>
             <detail-goodsinfo :goodsInfo="goodsInfo"></detail-goodsinfo>
             <detail-goodsparam :goodsParam="goodsParam"></detail-goodsparam>
+            <detail-commentinfo :commentInfo="commentInfo"></detail-commentinfo>
         </scroll>
     </div>
 </template>
@@ -19,6 +20,7 @@
     import detailshopinfo from '@views/detail/detail/detailshopinfo.vue'
     import detailGoodsInfo from '@views/detail/detail/detailGoodsInfo.vue'
     import detailGoodsParam from '@views/detail/detail/detailGoodsParam.vue'
+    import detailCommentInfo from '@views/detail/detail/detailCommentInfo.vue'
     import scroll from '@components/common/scroll/scroll.vue'
     export default {
         name: 'detail',
@@ -29,7 +31,8 @@
                 goods: {},
                 shopinfo: {},
                 goodsInfo: {},
-                goodsParam: {}
+                goodsParam: {},
+                commentInfo: {}
             }
         },
         components: {
@@ -39,6 +42,7 @@
             'detail-shopinfo': detailshopinfo,
             'detail-goodsinfo': detailGoodsInfo,
             'detail-goodsparam': detailGoodsParam,
+            'detail-commentinfo':detailCommentInfo,
             'scroll': scroll
         },
         created() {
@@ -49,8 +53,9 @@
                 this.shopinfo = new detailShop(res.result.shopInfo)
                 this.goodsParam = new detailParam(res.result.itemParams.info, res.result.itemParams.rule)
                 this.goodsInfo = res.result.detailInfo
+                this.commentInfo = res.result.rate
                 //console.log(res.result);
-                console.log(this.goodsParam);
+                console.log(this.commentInfo);
             })
         }
     }

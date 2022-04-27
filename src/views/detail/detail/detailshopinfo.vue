@@ -76,9 +76,9 @@
     .shopName {
         display: inline-block;
         position: absolute;
-        left: 98px;
         top: 50%;
-        transform: translate(-50%, -50%);
+        margin-left: 15px;
+        transform: translate(0, -50%);
     }
 
     .shopSell {
