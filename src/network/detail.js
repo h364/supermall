@@ -40,3 +40,9 @@ export class detailParam {
         this.sizes = rule.tables
     }
 }
+
+export function detailRecommend() {
+    return request({
+        url: '/recommend'
+    })
+}

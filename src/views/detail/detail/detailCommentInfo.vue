@@ -32,6 +32,11 @@
 </script>
 
 <style scoped>
+    .detailCommentInfo {
+        padding-bottom: 20px;
+        box-shadow: 0 5px 3px rgba(128, 128, 128, 0.2);
+    }
+
     .comment {
         margin-top: 25px;
     }
@@ -62,15 +67,15 @@
         transform: translate(0, -50%);
     }
 
-    .commentMessage{
+    .commentMessage {
         margin: 20px 0 0;
     }
 
-    .commentMessage span{
+    .commentMessage span {
         color: #666666a0;
     }
 
-    .message{
+    .message {
         margin: 15px 0;
     }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class='goodslistitem'>
-        <img :src="goodsitem.show.img" alt="" @load="imgLoad" @click="imgClick">
+        <img :src="showImage" alt="" @load="imgLoad" @click="imgClick">
         <div class="message">
             <p>{{goodsitem.title}}</p>
             <span class="price">{{goodsitem.price}}</span>
@@ -28,6 +28,11 @@
                     return {}
                 }
             }
+        },
+        computed: {
+          showImage() {
+              return this.goodsitem.image || this.goodsitem.show.img
+          } 
         },
         methods: {
             imgLoad() {
