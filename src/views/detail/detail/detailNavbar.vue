@@ -30,6 +30,7 @@ export default {
     methods: {
        titleClick(index) {
            this.currentIndex = index
+           this.$emit('detailTitleClick',index)
        },
        imgClick() {
            this.$router.back()
@@ -42,6 +43,7 @@ export default {
     .detailNavbar{
         background-color: #fff;
         position: relative;
+        height: 44px;
         z-index: 9;
     }
     .detail{
@@ -50,6 +52,9 @@ export default {
     .detailItem{
         flex: 1;
     } 
+    .detailImg{
+        height: 44px;
+    }
     .detailImg img{
         margin-top: 10px;
     }

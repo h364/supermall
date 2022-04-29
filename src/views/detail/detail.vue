@@ -1,15 +1,15 @@
 <template>
     <div class="detail">
-        <detai-navbar></detai-navbar>
+        <detai-navbar @detailTitleClick="titleClick" ref="detailNav"></detai-navbar>
         <scroll class="content" ref="detailBackTop" :scrollProbeType="3" :pullUpLoadMore="true"
             @contentScroll="contentScroll">
             <detail-swiper :topImages="topImages"></detail-swiper>
             <detail-message :message="goods"></detail-message>
             <detail-shopinfo :shopinfo="shopinfo"></detail-shopinfo>
-            <detail-goodsinfo :goodsInfo="goodsInfo"></detail-goodsinfo>
-            <detail-goodsparam :goodsParam="goodsParam"></detail-goodsparam>
-            <detail-commentinfo :commentInfo="commentInfo"></detail-commentinfo>
-            <goods-list :goods="recommend"></goods-list>
+            <detail-goodsinfo @detailImageLoad="detailImageLoad" :goodsInfo="goodsInfo"></detail-goodsinfo>
+            <detail-goodsparam ref="params" :goodsParam="goodsParam"></detail-goodsparam>
+            <detail-commentinfo ref="comment" :commentInfo="commentInfo"></detail-commentinfo>
+            <goods-list ref="recommend" :goods="recommend"></goods-list>
         </scroll>
         <back-top @click.native="backclick" v-show="isShowBackTop"></back-top>
     </div>
@@ -39,7 +39,9 @@
                 goodsParam: {},
                 commentInfo: {},
                 recommend: [],
-                isShowBackTop: false
+                componentOffset: [],
+                isShowBackTop: false,
+                currentIndex: 0
             }
         },
         components: {
@@ -57,9 +59,28 @@
         methods: {
             contentScroll(position) {
                 this.isShowBackTop = -position.y > 751
+                let positionY = -position.y
+                let length = this.componentOffset.length
+                for (let i = 0; i < length; i++) {
+                    if (this.currentIndex != i && ((i < length - 1 && positionY > this.componentOffset[i] && positionY < this.componentOffset[i + 1]) || (i == length - 1 && positionY > this.componentOffset[i]))) {
+                        this.currentIndex = i
+                        this.$refs.detailNav.currentIndex = i;
+                    }
+                }
             },
             backclick() {
                 this.$refs.detailBackTop.scroll.scrollTo(0, 0, 500)
+            },
+            titleClick(index) {
+                this.$refs.detailBackTop.scroll.scrollTo(0, -this.componentOffset[index], 500)
+            },
+            detailImageLoad() {
+                this.componentOffset = []
+                this.componentOffset.push(0)
+                this.componentOffset.push(this.$refs.params.$el.offsetTop - 44)
+                this.componentOffset.push(this.$refs.comment.$el.offsetTop)
+                this.componentOffset.push(this.$refs.recommend.$el.offsetTop - 44)
+                //console.log(this.componentOffset);
             }
         },
         created() {

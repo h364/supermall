@@ -28,6 +28,7 @@ export default {
 
     .left, .right{
         width: 60px;
+        height: 44px;
     }
 
     .center{

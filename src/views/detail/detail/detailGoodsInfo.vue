@@ -11,7 +11,7 @@
         <div class="goodsImage">
             <div class="goodslist" v-for="item in goodsInfo.detailImage">
                 <div class="goodsItem" v-for="imgItem in item.list">
-                    <img :src="imgItem" alt="">
+                    <img :src="imgItem" @load="imageLoad" alt="">
                 </div>
             </div>
         </div>
@@ -27,6 +27,11 @@
                 default() {
                     return {}
                 }
+            }
+        },
+        methods: {
+            imageLoad() {
+                this.$emit('detailImageLoad')
             }
         }
     }
