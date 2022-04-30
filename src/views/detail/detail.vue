@@ -12,6 +12,7 @@
             <goods-list ref="recommend" :goods="recommend"></goods-list>
         </scroll>
         <back-top @click.native="backclick" v-show="isShowBackTop"></back-top>
+        <detail-bottombar></detail-bottombar>
     </div>
 </template>
 
@@ -24,6 +25,7 @@
     import detailGoodsInfo from '@views/detail/detail/detailGoodsInfo.vue'
     import detailGoodsParam from '@views/detail/detail/detailGoodsParam.vue'
     import detailCommentInfo from '@views/detail/detail/detailCommentInfo.vue'
+    import detailBottomBar from '@views/detail/detail/detailBottomBar.vue'
     import goodslist from '@components/content/goodslist/goodslist.vue'
     import backtop from '@components/content/backtop/backtop.vue'
     import scroll from '@components/common/scroll/scroll.vue'
@@ -52,6 +54,7 @@
             'detail-goodsinfo': detailGoodsInfo,
             'detail-goodsparam': detailGoodsParam,
             'detail-commentinfo': detailCommentInfo,
+            'detail-bottombar': detailBottomBar,
             'goods-list': goodslist,
             'back-top': backtop,
             'scroll': scroll
@@ -117,6 +120,6 @@
     }
 
     .content {
-        height: 792px;
+        height: 742px;
     }
 </style>
