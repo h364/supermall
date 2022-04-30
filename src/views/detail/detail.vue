@@ -12,7 +12,7 @@
             <goods-list ref="recommend" :goods="recommend"></goods-list>
         </scroll>
         <back-top @click.native="backclick" v-show="isShowBackTop"></back-top>
-        <detail-bottombar></detail-bottombar>
+        <detail-bottombar @addToCart="addToCart"></detail-bottombar>
     </div>
 </template>
 
@@ -84,6 +84,15 @@
                 this.componentOffset.push(this.$refs.comment.$el.offsetTop)
                 this.componentOffset.push(this.$refs.recommend.$el.offsetTop - 44)
                 //console.log(this.componentOffset);
+            },
+            addToCart() {
+                const product = {}
+                product.image = this.topImages[0]
+                product.title = this.goods.title
+                product.desc = this.goods.desc
+                product.price = this.goods.realPrice
+                product.iid = this.iid
+                this.$store.commit('addToCart', product)
             }
         },
         created() {
@@ -95,6 +104,7 @@
                 this.goodsParam = new detailParam(res.result.itemParams.info, res.result.itemParams.rule)
                 this.goodsInfo = res.result.detailInfo
                 this.commentInfo = res.result.rate
+                console.log(this.goods);
             })
             detailRecommend().then((res) => {
                 this.recommend = res.data.list

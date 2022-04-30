@@ -1,13 +1,17 @@
 <template>
     <div id='shopping-cart'>
-        <h2>购物车</h2>
+        <shop-cart></shop-cart>
     </div>
 </template>
 
 <script>
-export default {
-    name: 'name'
+    import shopcart from '@views/shoppingcart/shopCart/shopcart.vue'
 
+export default {
+    name: 'shopping-cart',
+    components: {
+        'shop-cart': shopcart
+    }
 }
 </script>
 
