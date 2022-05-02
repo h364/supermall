@@ -34,6 +34,7 @@ export default {
        },
        imgClick() {
            this.$router.back()
+           this.$emit('backClick')
        }
     }
 }

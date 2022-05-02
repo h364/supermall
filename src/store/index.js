@@ -19,6 +19,7 @@ export default new Vuex.Store({
         oldPrice.count += 1
       } else {
         payload.count = 1
+        payload.checked = false
         state.cartList.push(payload)
       }
     }

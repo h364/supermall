@@ -1,6 +1,6 @@
 <template>
     <div class="detail">
-        <detai-navbar @detailTitleClick="titleClick" ref="detailNav"></detai-navbar>
+        <detai-navbar @backClick="backClick" @detailTitleClick="titleClick" ref="detailNav"></detai-navbar>
         <scroll class="content" ref="detailBackTop" :scrollProbeType="3" :pullUpLoadMore="true"
             @contentScroll="contentScroll">
             <detail-swiper :topImages="topImages"></detail-swiper>
@@ -93,6 +93,9 @@
                 product.price = this.goods.realPrice
                 product.iid = this.iid
                 this.$store.commit('addToCart', product)
+            },
+            backClick() {
+                this.$refs.detailBackTop.scroll.refresh()
             }
         },
         created() {
@@ -104,7 +107,6 @@
                 this.goodsParam = new detailParam(res.result.itemParams.info, res.result.itemParams.rule)
                 this.goodsInfo = res.result.detailInfo
                 this.commentInfo = res.result.rate
-                console.log(this.goods);
             })
             detailRecommend().then((res) => {
                 this.recommend = res.data.list
