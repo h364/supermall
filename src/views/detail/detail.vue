@@ -93,6 +93,7 @@
                 product.price = this.goods.realPrice
                 product.iid = this.iid
                 this.$store.commit('addToCart', product)
+                this.$toast.show('添加商品成功', 2000)
             },
             backClick() {
                 this.$refs.detailBackTop.scroll.refresh()

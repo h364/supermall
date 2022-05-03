@@ -5,7 +5,7 @@
             <span>全选</span>
         </div>
         <div class="totalPrice">合计:{{totalPrice}}</div>
-        <div class="calculate">去计算:{{totalGoods}}</div>
+        <div class="calculate" @click="calClick">去购买:{{totalGoods}}</div>
     </div>
 </template>
 
@@ -33,19 +33,26 @@
                 }, 0)
             },
             isSelectAll() {
-                if(this.$store.state.cartList.length == 0){
+                if (this.$store.state.cartList.length == 0) {
                     return false
-                }else{
+                } else {
                     return !this.$store.state.cartList.find(item => !item.checked)
                 }
             }
         },
         methods: {
             selectAll() {
-                if(this.isSelectAll){
+                if (this.isSelectAll) {
                     this.$store.state.cartList.forEach(item => item.checked = false)
-                }else{
+                } else {
                     this.$store.state.cartList.forEach(item => item.checked = true)
+                }
+            },
+            calClick() {
+                if (this.$store.state.cartList.length == 0) {
+                    this.$toast.show('购物车为空,请添加商品', 2000)
+                } else if (this.$store.state.cartList.length != 0 && this.totalGoods == 0) {
+                    this.$toast.show('您还没有选择商品', 2000)
                 }
             }
         }

@@ -16,7 +16,4 @@ export default {
 </script>
 
 <style scoped>
-    #shopCart{
-        height: 140px;
-    }
 </style>
