@@ -1,13 +1,20 @@
 <template>
-    <div id='my'>
-        <h2>我的</h2>
+    <div id='profile'>
+        <profile-navbar></profile-navbar>
+        <profile-account></profile-account>
     </div>
 </template>
 
 <script>
-export default {
-    name: 'name'
+    import profileNavbar from '@views/profile/profile/profileNavbar.vue'
+    import profileAccount from '@views/profile/profile/profileAccount.vue'
 
+export default {
+    name: 'profile',
+    components: {
+        'profile-navbar': profileNavbar,
+        'profile-account': profileAccount
+    }
 }
 </script>
 

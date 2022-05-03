@@ -2,8 +2,8 @@
     <div class='goodslistitem'>
         <img :src="showImage" alt="" @load="imgLoad" @click="imgClick">
         <div class="message">
-            <p>{{goodsitem.title}}</p>
-            <span class="price">{{goodsitem.price}}</span>
+            <p class="title">{{goodsitem.title}}</p>
+            <span class="price">￥{{goodsitem.price}}</span>
             <span class="collect">
                 <img v-if="isCollection" @click="collection" src="@assets/img/common/collection-active.png">
                 <img v-else @click="collection" src="@assets/img/common/collection.png">
@@ -30,9 +30,9 @@
             }
         },
         computed: {
-          showImage() {
-              return this.goodsitem.image || this.goodsitem.show.img
-          } 
+            showImage() {
+                return this.goodsitem.image || this.goodsitem.show.img
+            }
         },
         methods: {
             imgLoad() {
@@ -55,7 +55,9 @@
 
 <style scoped>
     .goodslistitem {
+        position: relative;
         width: 48%;
+        height: 350px;
     }
 
     .goodslistitem img {
@@ -69,6 +71,15 @@
     .message {
         display: flex;
         flex-wrap: wrap;
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+    }
+
+    .title {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .price,
